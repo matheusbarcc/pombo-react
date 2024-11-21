@@ -10,7 +10,7 @@ import { router } from './routes'
 export function App() {
   return (
     <HelmetProvider>
-      <ThemeProvider storageKey="pombo-theme" defaultTheme="light">
+      <ThemeProvider storageKey="pombo-theme" defaultTheme="dark">
         <Helmet titleTemplate="%s | pombo" />
         <Toaster richColors />
         <QueryClientProvider client={queryClient}>

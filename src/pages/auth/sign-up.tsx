@@ -1,12 +1,53 @@
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
+import { z } from 'zod'
 
-import CPFInput from '@/components/cpf-input'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+const signUpForm = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  cpf: z.string(),
+  password: z.string(),
+})
+
+type SignUpForm = z.infer<typeof signUpForm>
+
 export function SignUp() {
+  const navigate = useNavigate()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<SignUpForm>()
+
+  // const { mutateAsync: authenticate } = useMutation({
+  //   mutationFn: signIn,
+  // })
+
+  async function handleSignUp(data: SignUpForm) {
+    try {
+      // await authenticate({ email: data.email })
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      console.log(data)
+
+      toast.success('Conta criada com sucesso!', {
+        action: {
+          label: 'Login',
+          onClick: () => navigate(`/sign-in?email=${data.email}`),
+        },
+      })
+    } catch {
+      toast.error('Verifique os campos.')
+    }
+  }
+
   return (
     <>
       <Helmet title="Cadastro" />
@@ -25,18 +66,22 @@ export function SignUp() {
             </p>
           </div>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
             <div className="space-y-2">
               <Label>Seu nome</Label>
-              <Input id="name" type="text" />
+              <Input id="name" type="text" {...register('name')} />
               <Label>Seu e-mail</Label>
-              <Input id="email" type="email" />
+              <Input id="email" type="email" {...register('email')} />
               <Label>Seu CPF</Label>
-              <CPFInput id="cpf" />
+              <Input id="cpf" type="text" {...register('cpf')} />
               <Label>Sua senha</Label>
-              <Input id="password" type="password" />
+              <Input id="password" type="password" {...register('password')} />
             </div>
-            <Button className="w-full bg-primary" type="submit">
+            <Button
+              disabled={isSubmitting}
+              className="w-full bg-primary"
+              type="submit"
+            >
               Criar conta
             </Button>
           </form>
