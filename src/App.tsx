@@ -1,9 +1,19 @@
-import { Button } from "./components/ui/button";
+import { QueryClientProvider } from '@tanstack/react-query'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { RouterProvider } from 'react-router-dom'
+import { Toaster } from 'sonner'
+
+import { queryClient } from './lib/react-query'
+import { router } from './routes'
 
 export function App() {
   return (
-    <div className="flex h-screen justify-center items-center">
-      <Button>Clicar</Button>
-    </div>
+    <HelmetProvider>
+      <Helmet titleTemplate="%s | pombo" />
+      <Toaster richColors />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </HelmetProvider>
   )
 }
