@@ -1,9 +1,9 @@
-import { Bird } from 'lucide-react'
+import { Bird, SlidersHorizontal } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 
 import { MiniAdminCard } from '@/components/mini-admin-card'
-import { SearchAndFilters } from '@/components/search-and-filters'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
 export function AdminLayout() {
@@ -25,7 +25,12 @@ export function AdminLayout() {
       </div>
 
       <div className="flex flex-col border-l border-foreground/15 p-7 gap-3 sticky top-0 h-screen">
-        <SearchAndFilters />
+        <div className="w-full">
+          <Button variant="secondary" className="w-full">
+            <SlidersHorizontal />
+            Filtros
+          </Button>
+        </div>
         <Card className="flex flex-col gap-3 justify-center p-4">
           <div className="flex gap-3 items-center text-foreground font-semibold">
             <div className="bg-foreground w-3 h-3 p-0 m-0 rounded-full" />

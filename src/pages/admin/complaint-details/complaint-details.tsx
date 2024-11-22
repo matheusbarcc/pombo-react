@@ -1,49 +1,49 @@
+import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { Helmet } from 'react-helmet-async'
 
+import { ComplaintCaptions } from '@/components/complaint-captions'
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
-import profilePic from '../../../assets/mike.jpg'
-import pubPic from '../../../assets/pombo.png'
+import { ComplaintTableRow } from './complaint-table-row'
+import { ReportedPublicationCard } from './reported-publication-card'
 
 export function ComplaintDetails() {
   return (
     <>
       <Helmet title="Denuncias" />
       <div className="flex flex-col h-screen p-7 gap-5">
-        <Card className="w-full">
-          <CardHeader className="flex flex-row justify-between">
-            <div className="flex flex-row items-center gap-4">
-              <img
-                src={profilePic}
-                alt=""
-                className="h-10 w-10 rounded-sm
-                  outline
-                  outline-2
-                  outline-offset-2
-                  outline-primary"
-              />
-              <div>
-                <CardTitle className="text-md">pombo</CardTitle>
-                <CardDescription className="text-xs text-muted-foreground">
-                  pombo@pombo.com
-                </CardDescription>
-              </div>
-            </div>
-            <span className="text-xs text-muted-foreground">
-              há menos de um minuto
-            </span>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-3">
-            <div>Aqui suas ideias ganham asas. - GPT, Chat</div>
-            <img src={pubPic} alt="" className="rounded-md" />
-          </CardContent>
-        </Card>
+        <ReportedPublicationCard />
+        <div className="flex justify-between">
+          <h1 className="text-xl font-bold text-foreground">
+            Denuncias pendentes
+          </h1>
+          <div className="flex gap-8">
+            <ComplaintCaptions />
+          </div>
+        </div>
+        <ScrollArea className="h-[200px] w-full">
+          <Table className="w-full">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-full">Denunciante</TableHead>
+                <TableHead className="w-[]">Motivo</TableHead>
+                <TableHead className="w-[]">Data</TableHead>
+                <TableHead className=""></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <ComplaintTableRow key={i} />
+              ))}
+            </TableBody>
+          </Table>
+        </ScrollArea>
       </div>
     </>
   )
