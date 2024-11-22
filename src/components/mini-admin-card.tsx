@@ -24,7 +24,7 @@ export function MiniAdminCard() {
           <CardTitle className="text-lg">Mike Ehrmantraut</CardTitle>
           <CardDescription>waltuh@example.com</CardDescription>
         </div>
-        <div className="bg-rose-600 h-7 w-20 text-sm flex justify-center items-center font-bold rounded-sm">
+        <div className="bg-rose-600 h-7 w-20 text-sm flex justify-center items-center font-bold rounded-sm text-white">
             ADMIN
         </div>
       </CardHeader>

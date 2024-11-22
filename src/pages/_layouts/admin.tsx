@@ -1,7 +1,8 @@
 import { MiniAdminCard } from '@/components/mini-admin-card'
 import { SearchAndFilters } from '@/components/search-and-filters'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
-import { Bird } from 'lucide-react'
+import { Card } from '@/components/ui/card'
+import { Bird, Dot } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 
 export function AdminLayout() {
@@ -24,6 +25,24 @@ export function AdminLayout() {
 
       <div className="flex flex-col border-l border-foreground/15 p-7 gap-3 sticky top-0 h-screen">
         <SearchAndFilters />
+        <Card className='flex flex-col gap-3 justify-center p-4'>
+          <div className='flex gap-3 items-center text-foreground font-semibold'>
+            <div className='bg-foreground w-3 h-3 p-0 m-0 rounded-full' />
+            <span className='leading-none'>Total</span>
+          </div>
+          <div className='flex gap-3 items-center text-foreground font-semibold'>
+            <div className='bg-yellow-500 w-3 h-3 p-0 m-0 rounded-full' />
+            <span className='leading-none'>Pendentes</span>
+          </div>
+          <div className='flex gap-3 items-center text-foreground font-semibold'>
+            <div className='bg-rose-500 w-3 h-3 p-0 m-0 rounded-full' />
+            <span className='leading-none'>Rejeitada</span>
+          </div>
+          <div className='flex gap-3 items-center text-foreground font-semibold'>
+            <div className='bg-green-500 w-3 h-3 p-0 m-0 rounded-full' />
+            <span className='leading-none'>Aprovadas</span>
+          </div>
+        </Card>
       </div>
     </div>
   )
