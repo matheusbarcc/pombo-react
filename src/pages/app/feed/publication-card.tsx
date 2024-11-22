@@ -41,7 +41,7 @@ export function PublicationCard() {
       <CardFooter>
         <Button
           variant="ghost"
-          className="h-2 hover:bg-transparent flex items-center gap-2"
+          className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
         >
           <Heart className="h-5 w-5 text-primary" />
           <span className="text-muted-foreground text-sm">500k</span>
