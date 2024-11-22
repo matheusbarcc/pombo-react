@@ -1,4 +1,4 @@
-import { Bird, Plus } from 'lucide-react'
+import { Bird, ChevronLeft, Plus } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 
 import { MiniProfileCard } from '@/components/mini-profile-card'
@@ -15,7 +15,12 @@ export function AppLayout() {
             <Bird className="h-8 w-8" />
             <span className="font-bold text-2xl">pombo</span>
           </div>
-          <ThemeToggle />
+          <div className="flex gap-2">
+            <ThemeToggle />
+            <Button variant="outline" className="w-10 h-10">
+              <ChevronLeft />
+            </Button>
+          </div>
         </div>
         <MiniProfileCard />
         <Button className="font-bold text-lg h-12 flex">

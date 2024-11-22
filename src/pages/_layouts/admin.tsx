@@ -1,4 +1,4 @@
-import { Bird, SlidersHorizontal } from 'lucide-react'
+import { Bird, ChevronLeft, SlidersHorizontal } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 
 import { MiniAdminCard } from '@/components/mini-admin-card'
@@ -15,7 +15,12 @@ export function AdminLayout() {
             <Bird className="h-8 w-8" />
             <span className="font-bold text-2xl">pombo</span>
           </div>
-          <ThemeToggle />
+          <div className="flex gap-2">
+            <ThemeToggle />
+            <Button variant="outline" className="w-10 h-10">
+              <ChevronLeft />
+            </Button>
+          </div>
         </div>
         <MiniAdminCard />
       </div>
