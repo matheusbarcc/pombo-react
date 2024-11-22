@@ -27,7 +27,7 @@ export function MiniProfileCard() {
       </CardHeader>
       <Separator />
       <CardFooter className="flex flex-col gap-2 w-full py-3">
-        <Button className="w-full">
+        <Button variant="outline" className="w-full">
           <PencilLine />
           <span>Editar Perfil</span>
         </Button>
