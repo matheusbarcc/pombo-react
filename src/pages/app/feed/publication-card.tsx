@@ -38,7 +38,7 @@ export function PublicationCard() {
         </span>
       </CardHeader>
       <CardContent>Aqui suas ideias ganham asas. - GPT, Chat</CardContent>
-      <CardFooter>
+      <CardFooter className="flex gap-6">
         <Button
           variant="ghost"
           className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
@@ -48,7 +48,7 @@ export function PublicationCard() {
         </Button>
         <Button
           variant="ghost"
-          className="h-2 hover:bg-transparent flex items-center gap-2"
+          className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
         >
           <Megaphone className="h-5 w-5 text-muted-foreground" />
           <span className="text-muted-foreground text-sm">0</span>
