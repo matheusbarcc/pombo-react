@@ -1,5 +1,5 @@
 import { Bird, ChevronLeft, Plus } from 'lucide-react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import { MiniProfileCard } from '@/components/mini-profile-card'
 import { SearchAndFilters } from '@/components/search-and-filters'
@@ -7,6 +7,8 @@ import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { Button } from '@/components/ui/button'
 
 export function AppLayout() {
+  const navigate = useNavigate()
+
   return (
     <div className="grid min-h-screen grid-cols-[1fr_2fr_1fr] px-52 antialiased gap-4">
       <div className="flex flex-col border-r border-foreground/15 p-7 gap-6 scroll sticky top-0 h-screen">
@@ -17,7 +19,13 @@ export function AppLayout() {
           </div>
           <div className="flex gap-2">
             <ThemeToggle />
-            <Button variant="outline" className="w-10 h-10">
+            <Button
+              variant="outline"
+              className="w-10 h-10"
+              onClick={() => {
+                navigate('/')
+              }}
+            >
               <ChevronLeft />
             </Button>
           </div>
