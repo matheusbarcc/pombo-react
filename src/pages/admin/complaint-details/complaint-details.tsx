@@ -32,9 +32,9 @@ export function ComplaintDetails() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Denunciante</TableHead>
-                <TableHead className="w-[100px]">Motivo</TableHead>
-                <TableHead className="w-[100px]">Data</TableHead>
+                <TableHead className="w-[200px]">Denunciante</TableHead>
+                <TableHead className="w-[200px]">Motivo</TableHead>
+                <TableHead>Data</TableHead>
                 <TableHead></TableHead>
               </TableRow>
             </TableHeader>

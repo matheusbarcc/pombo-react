@@ -1,5 +1,6 @@
 import { Search } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
+import { useNavigate } from 'react-router-dom'
 
 import { Avatar } from '@/components/avatar'
 import { ComplaintCaptions } from '@/components/complaint-captions'
@@ -15,6 +16,8 @@ import {
 import waltuhProfilePic from '../../../assets/waltuh.jpg'
 
 export function ReportedPublications() {
+  const navigate = useNavigate()
+
   return (
     <>
       <Helmet title="Admin" />
@@ -40,7 +43,12 @@ export function ReportedPublications() {
             </CardHeader>
             <CardContent className="flex items-center justify-between">
               <span>Im the danger</span>
-              <Button variant="default">
+              <Button
+                variant="default"
+                onClick={() => {
+                  navigate('/admin/details')
+                }}
+              >
                 <Search />
                 Analisar
               </Button>

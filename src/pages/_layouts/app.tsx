@@ -1,5 +1,5 @@
 import { DialogTrigger } from '@radix-ui/react-dialog'
-import { Bird, ChevronLeft, Plus, SlidersHorizontal } from 'lucide-react'
+import { Bird, Home, Plus, SlidersHorizontal } from 'lucide-react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import { MiniProfileCard } from '@/components/mini-profile-card'
@@ -29,7 +29,7 @@ export function AppLayout() {
                 navigate('/')
               }}
             >
-              <ChevronLeft />
+              <Home />
             </Button>
           </div>
         </div>
