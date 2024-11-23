@@ -1,4 +1,4 @@
-import { Bird } from 'lucide-react'
+import { Search } from 'lucide-react'
 
 import { Button } from './ui/button'
 import { Checkbox } from './ui/checkbox'
@@ -45,8 +45,8 @@ export function PublicationFiltersDialog() {
           </div>
         </div>
         <Button className="w-full bg-primary" type="submit">
-          <Bird />
-          Publicar
+          <Search />
+          Pesquisar
         </Button>
       </form>
     </DialogContent>

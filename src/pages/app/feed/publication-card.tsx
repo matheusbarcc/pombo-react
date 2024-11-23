@@ -1,4 +1,5 @@
 import { Heart, Megaphone } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 import { Avatar } from '@/components/avatar'
 import { Button } from '@/components/ui/button'
@@ -14,13 +15,20 @@ import {
 import profilePic from '../../../assets/mike.jpg'
 
 export function PublicationCard() {
+  const navigate = useNavigate()
+
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row justify-between">
         <div className="flex flex-row gap-4">
           <Avatar src={profilePic} size="small" />
           <div>
-            <CardTitle className="text-md">pombo</CardTitle>
+            <CardTitle
+              className="text-md hover:cursor-pointer"
+              onClick={() => navigate('/profile')}
+            >
+              pombo
+            </CardTitle>
             <CardDescription className="text-xs text-muted-foreground">
               pombo@pombo.com
             </CardDescription>
@@ -30,7 +38,12 @@ export function PublicationCard() {
           há menos de um minuto
         </span>
       </CardHeader>
-      <CardContent>Aqui suas ideias ganham asas. - GPT, Chat</CardContent>
+      <CardContent
+        className="hover:cursor-pointer"
+        onClick={() => navigate('/details')}
+      >
+        Aqui suas ideias ganham asas. - GPT, Chat
+      </CardContent>
       <CardFooter className="flex gap-6">
         <Button
           variant="ghost"

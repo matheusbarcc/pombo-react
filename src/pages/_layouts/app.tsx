@@ -46,7 +46,7 @@ export function AppLayout() {
         </Dialog>
       </div>
 
-      <div className="overflow-y-auto scrollbar-hide">
+      <div className="overflow-y-auto scrollbar-hide mb-7">
         <Outlet />
       </div>
 
