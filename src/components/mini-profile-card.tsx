@@ -2,6 +2,7 @@ import { LogOut, PencilLine } from 'lucide-react'
 
 import profilePic from '../assets/mike.jpg'
 import { Avatar } from './avatar'
+import { EditProfileDialog } from './edit-profile-dialog'
 import { Button } from './ui/button'
 import {
   Card,
@@ -10,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from './ui/card'
+import { Dialog, DialogTrigger } from './ui/dialog'
 import { Separator } from './ui/separator'
 
 export function MiniProfileCard() {
@@ -24,10 +26,16 @@ export function MiniProfileCard() {
       </CardHeader>
       <Separator />
       <CardFooter className="flex flex-col gap-2 w-full py-3">
-        <Button variant="outline" className="w-full">
-          <PencilLine />
-          <span>Editar Perfil</span>
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline" className="w-full">
+              <PencilLine />
+              <span>Editar Perfil</span>
+            </Button>
+          </DialogTrigger>
+
+          <EditProfileDialog />
+        </Dialog>
         <Button variant="secondary" className="w-full  text-rose-500">
           <LogOut />
           <span className="">Sair</span>

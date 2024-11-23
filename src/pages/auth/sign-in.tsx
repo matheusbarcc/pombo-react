@@ -1,4 +1,3 @@
-import { Label } from '@radix-ui/react-dropdown-menu'
 // import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
@@ -8,6 +7,7 @@ import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 const signInForm = z.object({
   email: z.string().email(),
