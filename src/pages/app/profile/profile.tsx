@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
+import { Avatar } from '@/components/avatar'
 import {
   Card,
   CardDescription,
@@ -19,11 +20,7 @@ export function Profile() {
         <Card className="border-0 shadow-none">
           <CardHeader className="flex flex-row justify-between">
             <div className="flex flex-row gap-5">
-              <img
-                src={profilePic}
-                alt=""
-                className="h-20 w-20 rounded-lg outline outline-offset-2 outline-primary"
-              />
+              <Avatar src={profilePic} size="xl" />
               <div className="flex flex-col gap-1">
                 <CardTitle>Mike Ehrmantraut</CardTitle>
                 <CardDescription>waltuh@example.com</CardDescription>

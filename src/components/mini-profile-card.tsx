@@ -1,6 +1,7 @@
 import { LogOut, PencilLine } from 'lucide-react'
 
 import profilePic from '../assets/mike.jpg'
+import { Avatar } from './avatar'
 import { Button } from './ui/button'
 import {
   Card,
@@ -15,11 +16,7 @@ export function MiniProfileCard() {
   return (
     <Card className="flex flex-col items-center">
       <CardHeader className="flex flex-col items-center gap-3">
-        <img
-          src={profilePic}
-          alt=""
-          className="w-16 h-1w-16 rounded-lg outline outline-offset-2 outline-primary"
-        />
+        <Avatar src={profilePic} size="large" />
         <div className="flex flex-col">
           <CardTitle className="text-lg">Mike Ehrmantraut</CardTitle>
           <CardDescription>waltuh@example.com</CardDescription>

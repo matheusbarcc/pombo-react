@@ -8,16 +8,15 @@ export function ComplaintTableRow() {
     <TableRow>
       <TableCell>
         <div>Jesse Pinkman</div>
-        <div>cook2@example.com</div>
       </TableCell>
       <TableCell>DISCURSO DE ODIO</TableCell>
       <TableCell>22/11/2024</TableCell>
       <TableCell className="flex flex-row gap-2">
-        <Button variant="outline">
+        <Button variant="outline" size={'sm'}>
           <Check />
           Aprovar
         </Button>
-        <Button variant="outline">
+        <Button variant="outline" size={'sm'}>
           <X />
           Rejeitar
         </Button>

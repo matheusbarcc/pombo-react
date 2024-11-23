@@ -1,5 +1,6 @@
 import { Heart, Megaphone } from 'lucide-react'
 
+import { Avatar } from '@/components/avatar'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -16,16 +17,8 @@ export function PublicationCard() {
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row justify-between">
-        <div className="flex flex-row items-center gap-4">
-          <img
-            src={profilePic}
-            alt=""
-            className="h-8 w-8 rounded-sm
-                  outline
-                  outline-2
-                  outline-offset-2
-                  outline-primary"
-          />
+        <div className="flex flex-row gap-4">
+          <Avatar src={profilePic} size="small" />
           <div>
             <CardTitle className="text-md">pombo</CardTitle>
             <CardDescription className="text-xs text-muted-foreground">

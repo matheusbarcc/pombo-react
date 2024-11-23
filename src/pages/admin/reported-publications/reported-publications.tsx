@@ -1,6 +1,7 @@
 import { Search } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 
+import { Avatar } from '@/components/avatar'
 import { ComplaintCaptions } from '@/components/complaint-captions'
 import { Button } from '@/components/ui/button'
 import {
@@ -25,11 +26,7 @@ export function ReportedPublications() {
           <Card>
             <CardHeader className="flex flex-row justify-between">
               <div className="flex gap-4">
-                <img
-                  src={waltuhProfilePic}
-                  alt=""
-                  className="object-cover h-11 w-11 rounded-sm outline outline-2 outline-offset-2 outline-primary"
-                />
+                <Avatar src={waltuhProfilePic} size="small" />
                 <div>
                   <CardTitle className="text-md">Walter White</CardTitle>
                   <CardDescription className="text-xs">

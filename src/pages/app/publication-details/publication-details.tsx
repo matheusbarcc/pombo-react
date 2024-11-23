@@ -1,6 +1,7 @@
 import { Heart } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 
+import { Avatar } from '@/components/avatar'
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
 
 import mikeProfilePic from '../../../assets/mike.jpg'
@@ -16,11 +17,7 @@ export function PublicationDetails() {
         <h1 className="text-xl font-bold text-foreground">Curtidas</h1>
         <Card className="items-center border-0 border-t pt-5 px-2 rounded-none flex flex-row justify-between shadow-none bg-transparent">
           <div className="flex gap-3">
-            <img
-              src={mikeProfilePic}
-              alt=""
-              className="object-cover h-11 w-11 rounded-sm outline outline-2 outline-offset-2 outline-primary"
-            />
+            <Avatar src={mikeProfilePic} size="small" />
             <div>
               <CardTitle className="text-md">Mike Ehrmantraut</CardTitle>
               <CardDescription className="text-xs">
@@ -32,11 +29,7 @@ export function PublicationDetails() {
         </Card>
         <Card className="items-center border-0 border-t pt-5 px-2 rounded-none flex flex-row justify-between shadow-none bg-transparent">
           <div className="flex gap-3">
-            <img
-              src={waltuhProfilePic}
-              alt=""
-              className="object-cover h-11 w-11 rounded-sm outline outline-2 outline-offset-2 outline-primary"
-            />
+            <Avatar src={waltuhProfilePic} size="small" />
             <div>
               <CardTitle className="text-md">Walter White</CardTitle>
               <CardDescription className="text-xs">
