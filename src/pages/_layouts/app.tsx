@@ -1,10 +1,13 @@
+import { DialogTrigger } from '@radix-ui/react-dialog'
 import { Bird, ChevronLeft, Plus } from 'lucide-react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import { MiniProfileCard } from '@/components/mini-profile-card'
+import { NewPublicationDialog } from '@/components/new-publication-dialog'
 import { SearchAndFilters } from '@/components/search-and-filters'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { Button } from '@/components/ui/button'
+import { Dialog } from '@/components/ui/dialog'
 
 export function AppLayout() {
   const navigate = useNavigate()
@@ -31,10 +34,16 @@ export function AppLayout() {
           </div>
         </div>
         <MiniProfileCard />
-        <Button className="font-bold text-lg h-12 flex">
-          <Plus />
-          Novo Pruu
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="font-bold text-lg h-12 flex">
+              <Plus />
+              Novo Pruu
+            </Button>
+          </DialogTrigger>
+
+          <NewPublicationDialog />
+        </Dialog>
       </div>
 
       <div className="overflow-y-auto scrollbar-hide">
