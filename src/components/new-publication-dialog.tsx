@@ -24,9 +24,10 @@ export function NewPublicationDialog() {
         <Textarea
           placeholder="Ex: Aqui suas ideias ganham asas"
           className="resize-none"
+          id="text"
         />
         <Input type="file" />
-        <Button className="w-full bg-primary" type="submit">
+        <Button className="w-full bg-primary" type="submit" id="file">
           <Bird />
           Publicar
         </Button>

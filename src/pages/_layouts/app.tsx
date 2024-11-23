@@ -1,10 +1,10 @@
 import { DialogTrigger } from '@radix-ui/react-dialog'
-import { Bird, ChevronLeft, Plus } from 'lucide-react'
+import { Bird, ChevronLeft, Plus, SlidersHorizontal } from 'lucide-react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import { MiniProfileCard } from '@/components/mini-profile-card'
 import { NewPublicationDialog } from '@/components/new-publication-dialog'
-import { SearchAndFilters } from '@/components/search-and-filters'
+import { PublicationFiltersDialog } from '@/components/publication-filters-dialog'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Dialog } from '@/components/ui/dialog'
@@ -51,7 +51,18 @@ export function AppLayout() {
       </div>
 
       <div className="flex flex-col border-l border-foreground/15 p-7 gap-3 sticky top-0 h-screen">
-        <SearchAndFilters />
+        <div className="w-full">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="secondary" className="w-full">
+                <SlidersHorizontal />
+                Filtros
+              </Button>
+            </DialogTrigger>
+
+            <PublicationFiltersDialog />
+          </Dialog>
+        </div>
       </div>
     </div>
   )
