@@ -10,7 +10,8 @@ import {
 import { Separator } from '@/components/ui/separator'
 
 import profilePic from '../../../assets/mike.jpg'
-import { PublicationCard } from '../feed/publication-card'
+import { PublicationCard } from '../../../components/publication-card'
+// import { PublicationCard } from '../feed/publication-card'
 
 export function Profile() {
   return (

@@ -1,7 +1,7 @@
-import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { Helmet } from 'react-helmet-async'
 
 import { ComplaintCaptions } from '@/components/complaint-captions'
+import { Pagination } from '@/components/pagination'
 import {
   Table,
   TableBody,
@@ -27,23 +27,24 @@ export function ComplaintDetails() {
             <ComplaintCaptions />
           </div>
         </div>
-        <ScrollArea className="h-[200px] w-full">
-          <Table className="w-full">
+        <Pagination pageIndex={0} totalCount={105} perPage={10} />
+        <div className="rounded-md border">
+          <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-full">Denunciante</TableHead>
-                <TableHead className="w-[]">Motivo</TableHead>
-                <TableHead className="w-[]">Data</TableHead>
-                <TableHead className=""></TableHead>
+                <TableHead>Denunciante</TableHead>
+                <TableHead className="w-[100px]">Motivo</TableHead>
+                <TableHead className="w-[100px]">Data</TableHead>
+                <TableHead></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {Array.from({ length: 8 }).map((_, i) => (
-                <ComplaintTableRow key={i} />
-              ))}
+              {Array.from({ length: 5 }).map((_, i) => {
+                return <ComplaintTableRow key={i} />
+              })}
             </TableBody>
           </Table>
-        </ScrollArea>
+        </div>
       </div>
     </>
   )

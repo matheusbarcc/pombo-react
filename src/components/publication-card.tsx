@@ -1,5 +1,7 @@
-import { Bird, Heart, Megaphone } from 'lucide-react'
+import { Heart, Megaphone } from 'lucide-react'
 
+import { Avatar } from '@/components/avatar'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -7,14 +9,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card'
+} from '@/components/ui/card'
+
+import profilePic from '../assets/mike.jpg'
 
 export function PublicationCard() {
   return (
-    <Card className="w-[600px]">
+    <Card className="w-full">
       <CardHeader className="flex flex-row justify-between">
-        <div className="flex flex-row items-center gap-4">
-          <Bird className="h-8 w-8 text-primary" />
+        <div className="flex flex-row gap-4">
+          <Avatar src={profilePic} size="small" />
           <div>
             <CardTitle className="text-md">pombo</CardTitle>
             <CardDescription className="text-xs text-muted-foreground">
@@ -27,15 +31,21 @@ export function PublicationCard() {
         </span>
       </CardHeader>
       <CardContent>Aqui suas ideias ganham asas. - GPT, Chat</CardContent>
-      <CardFooter className="gap-6">
-        <div className="flex items-center gap-2">
+      <CardFooter className="flex gap-6">
+        <Button
+          variant="ghost"
+          className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
+        >
           <Heart className="h-5 w-5 text-primary" />
           <span className="text-muted-foreground text-sm">500k</span>
-        </div>
-        <div className="flex items-center gap-2">
+        </Button>
+        <Button
+          variant="ghost"
+          className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
+        >
           <Megaphone className="h-5 w-5 text-muted-foreground" />
           <span className="text-muted-foreground text-sm">0</span>
-        </div>
+        </Button>
       </CardFooter>
     </Card>
   )
