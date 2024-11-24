@@ -1,9 +1,11 @@
+import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { createUser } from '@/api/create-user'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -26,16 +28,18 @@ export function SignUp() {
     formState: { isSubmitting },
   } = useForm<SignUpForm>()
 
-  // const { mutateAsync: authenticate } = useMutation({
-  //   mutationFn: signIn,
-  // })
+  const { mutateAsync: registerUser } = useMutation({
+    mutationFn: createUser,
+  })
 
   async function handleSignUp(data: SignUpForm) {
     try {
-      // await authenticate({ email: data.email })
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      console.log(data)
+      await registerUser({
+        name: data.name,
+        email: data.email,
+        cpf: data.cpf,
+        password: data.password,
+      })
 
       toast.success('Conta criada com sucesso!', {
         action: {
@@ -44,7 +48,7 @@ export function SignUp() {
         },
       })
     } catch {
-      toast.error('Verifique os campos.')
+      toast.error('Credenciais inválidas.')
     }
   }
 
@@ -67,15 +71,27 @@ export function SignUp() {
           </div>
 
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
-            <div className="space-y-2">
-              <Label>Seu nome</Label>
-              <Input id="name" type="text" {...register('name')} />
-              <Label>Seu e-mail</Label>
-              <Input id="email" type="email" {...register('email')} />
-              <Label>Seu CPF</Label>
-              <Input id="cpf" type="text" {...register('cpf')} />
-              <Label>Sua senha</Label>
-              <Input id="password" type="password" {...register('password')} />
+            <div className="space-y-3">
+              <div className="flex flex-col gap-2">
+                <Label>Seu nome</Label>
+                <Input id="name" type="text" {...register('name')} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label>Seu e-mail</Label>
+                <Input id="email" type="email" {...register('email')} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label>Seu CPF</Label>
+                <Input id="cpf" type="text" {...register('cpf')} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label>Sua senha</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  {...register('password')}
+                />
+              </div>
             </div>
             <Button
               disabled={isSubmitting}

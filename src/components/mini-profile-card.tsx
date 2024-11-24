@@ -1,4 +1,5 @@
 import { LogOut, PencilLine } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 import profilePic from '../assets/mike.jpg'
 import { Avatar } from './avatar'
@@ -15,6 +16,8 @@ import { Dialog, DialogTrigger } from './ui/dialog'
 import { Separator } from './ui/separator'
 
 export function MiniProfileCard() {
+  const navigate = useNavigate()
+
   return (
     <Card className="flex flex-col items-center">
       <CardHeader className="flex flex-col items-center gap-3">
@@ -36,7 +39,15 @@ export function MiniProfileCard() {
 
           <EditProfileDialog />
         </Dialog>
-        <Button variant="secondary" className="w-full  text-rose-500">
+        <Button
+          variant="secondary"
+          className="w-full  text-rose-500"
+          onClick={() => {
+            localStorage.removeItem('pombo-auth-token')
+
+            navigate('/sign-in')
+          }}
+        >
           <LogOut />
           <span className="">Sair</span>
         </Button>

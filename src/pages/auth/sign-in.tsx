@@ -44,9 +44,7 @@ export function SignIn() {
         password: data.password,
       })
 
-      localStorage.setItem('pombo-auth-token', response)
-
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await localStorage.setItem('pombo-auth-token', response)
 
       navigate('/')
     } catch {
