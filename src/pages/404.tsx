@@ -6,8 +6,8 @@ export function NotFound() {
       <h1 className="text-4xl font-bold">Página não encontrada</h1>
       <p>
         Voltar para o{' '}
-        <Link to="/" className="text-sky-600 dark:text-sky-400">
-          Feed
+        <Link to="/sign-in" className="text-sky-600 dark:text-sky-400">
+          Sign In
         </Link>
       </p>
     </div>

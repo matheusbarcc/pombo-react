@@ -46,6 +46,8 @@ export function SignIn() {
 
       localStorage.setItem('pombo-auth-token', response)
 
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
       navigate('/')
     } catch {
       toast.error('Credenciais inválidas.')
