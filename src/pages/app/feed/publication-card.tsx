@@ -1,6 +1,7 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { Heart, Megaphone } from 'lucide-react'
+import { jwtDecode } from 'jwt-decode'
+import { Heart, Megaphone, Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 import { Avatar } from '@/components/avatar'
@@ -36,6 +37,17 @@ export function PublicationCard({ publication }: PublicationCardProps) {
     publication.userProfilePictureUrl =
       'https://conteudo.imguol.com.br/c/esporte/10/2022/09/23/richarlison-comemora-gol-pela-selecao-brasileira-em-amistoso-contra-gana-1663969438957_v2_4x3.jpg'
   }
+  const token = localStorage.getItem('pombo-auth-token') || '' // Use logical OR (||) to set a default value
+  let user = null
+
+  if (token) {
+    try {
+      user = jwtDecode(token)
+    } catch (error) {
+      console.error('Invalid token:', error)
+      user = null // Ensure user is null if decoding fails
+    }
+  }
 
   return (
     <Card className="w-full">
@@ -54,12 +66,19 @@ export function PublicationCard({ publication }: PublicationCardProps) {
             </CardDescription>
           </div>
         </div>
-        <span className="text-xs text-muted-foreground">
-          {formatDistanceToNow(publication.createdAt, {
-            locale: ptBR,
-            addSuffix: true,
-          })}
-        </span>
+        <div className="flex gap-3 items-center">
+          <span className="text-xs text-muted-foreground">
+            {formatDistanceToNow(publication.createdAt, {
+              locale: ptBR,
+              addSuffix: true,
+            })}
+          </span>
+          {publication.userEmail === user?.sub ? (
+            <Button className="group bg-transparent hover:bg-transparent p-0">
+              <Trash2 className="w-8 h-8 text-gray-500 group-hover:text-red-500 transition-colors" />
+            </Button>
+          ) : null}
+        </div>
       </CardHeader>
       <CardContent
         className="hover:cursor-pointer flex flex-col gap-3"
