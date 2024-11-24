@@ -62,10 +62,17 @@ export function PublicationCard({ publication }: PublicationCardProps) {
         </span>
       </CardHeader>
       <CardContent
-        className="hover:cursor-pointer"
+        className="hover:cursor-pointer flex flex-col gap-3"
         onClick={() => navigate('/details')}
       >
         {publication.publicationContent}
+        {publication.publicationAttachmentUrl && (
+          <img
+            src={publication.publicationAttachmentUrl}
+            alt=""
+            className="rounded-md"
+          />
+        )}
       </CardContent>
       <CardFooter className="flex gap-6">
         <Button
