@@ -1,10 +1,12 @@
 // import { useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { signIn } from '@/api/sign-in'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -17,6 +19,8 @@ const signInForm = z.object({
 type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
+  const navigate = useNavigate()
+
   const [searchParams] = useSearchParams()
 
   const {
@@ -29,20 +33,25 @@ export function SignIn() {
     },
   })
 
-  // const { mutateAsync: authenticate } = useMutation({
-  //   mutationFn: signIn,
-  // })
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  })
 
   async function handleSignIn(data: SignInForm) {
     try {
-      // await authenticate({ email: data.email })
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      throw new Error()
-      console.log(data)
+      const response = await authenticate({
+        email: data.email,
+        password: data.password,
+      })
+
+      localStorage.setItem('pombo-auth-token', response)
+
+      navigate('/')
     } catch {
-      toast.error('Email e/ou senha inválidos.')
+      toast.error('Credenciais inválidas.')
     }
   }
+
   return (
     <>
       <Helmet title="Login" />
