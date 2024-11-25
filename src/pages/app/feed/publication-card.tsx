@@ -127,7 +127,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
             onClick={() => handleLikePublication(publication.publicationId)}
           >
             <Heart fill="#1CA0F2" className="h-5 w-5 text-primary" />
-            <span className="text-muted-foreground text-sm">
+            <span className="text-muted-foreground text-sm font-mono font-semibold">
               {likes.length}
             </span>
           </Button>
@@ -137,7 +137,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
         >
           <Megaphone className="h-5 w-5 text-muted-foreground" />
-          <span className="text-muted-foreground text-sm">
+          <span className="text-muted-foreground text-sm font-semibold">
             {publication.complaintAmount}
           </span>
         </Button>
