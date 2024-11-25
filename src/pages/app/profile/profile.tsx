@@ -23,6 +23,8 @@ export function Profile() {
   const { userId } = useParams()
   const { filters } = useFilters()
 
+  console.log(userId)
+
   if (!userId) {
     throw new Error('User ID is required.')
   }
@@ -33,18 +35,18 @@ export function Profile() {
   })
 
   const { data: publications } = useQuery({
-    queryKey: ['publications', filters],
+    queryKey: ['publications', filters, user?.userId],
     queryFn: () =>
       getPublications({
         page: 1,
         limit: 10,
-        userId: user?.userId,
+        userId: user?.userId, // Ensure the correct userId is passed
         content: filters.content || undefined,
         createdAtStart: filters.createdAtStart || undefined,
         createdAtEnd: filters.createdAtEnd || undefined,
         isLiked: filters.isLiked || undefined,
       }),
-    enabled: true,
+    enabled: !!user, // Only fetch when user data is available
   })
 
   return (
