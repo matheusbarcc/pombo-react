@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { formatDistanceToNow } from 'date-fns'
+import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Bird } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
@@ -66,9 +66,8 @@ export function Profile() {
               </span>
               <span className="text-foreground text-xs">
                 {user?.createdAt
-                  ? formatDistanceToNow(user.createdAt, {
+                  ? format(new Date(user.createdAt), 'dd MMM. yyyy', {
                       locale: ptBR,
-                      addSuffix: true,
                     })
                   : null}
               </span>

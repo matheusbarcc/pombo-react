@@ -3,11 +3,12 @@ import { api } from '@/lib/axios'
 export interface GetPublicationsBody {
   page: number
   limit: number
+  content?: string
   userId?: string
   publicationId?: string
   isLiked?: boolean
   createdAtStart?: string
-  createdAtFinal?: string
+  createdAtEnd?: string
 }
 
 export interface Publication {
@@ -27,20 +28,22 @@ export interface Publication {
 export async function getPublications({
   page,
   limit,
+  content,
   userId,
   publicationId,
   isLiked,
   createdAtStart,
-  createdAtFinal,
+  createdAtEnd,
 }: GetPublicationsBody) {
   const response = await api.post<Publication[]>('/publication/filter', {
     page,
     limit,
+    content,
     userId,
     publicationId,
     isLiked,
     createdAtStart,
-    createdAtFinal,
+    createdAtEnd,
   })
 
   return response.data

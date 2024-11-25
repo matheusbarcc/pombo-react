@@ -2,31 +2,39 @@ import { useQuery } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 
 import { getPublications } from '@/api/get-publications'
+import { useFilters } from '@/pages/_layouts/app'
 
 import { PublicationCard } from './publication-card'
 
 export function Feed() {
+  const { filters } = useFilters()
+
+  console.log(filters)
+
   const { data: publications } = useQuery({
-    queryKey: ['publications'],
+    queryKey: ['publications', filters], // Include filters in the query key
     queryFn: () =>
       getPublications({
         page: 1,
         limit: 10,
+        content: filters.content || undefined,
+        createdAtStart: filters.createdAtStart || undefined,
+        createdAtEnd: filters.createdAtEnd || undefined,
+        isLiked: filters.isLiked || undefined,
       }),
+    enabled: true, // Make sure the query runs even with filters
   })
 
   return (
     <>
       <Helmet title="Feed" />
       <div className="flex flex-col h-screen p-7 gap-5">
-        {publications?.map((publication) => {
-          return (
-            <PublicationCard
-              key={publication.publicationId}
-              publication={publication}
-            />
-          )
-        })}
+        {publications?.map((publication) => (
+          <PublicationCard
+            key={publication.publicationId}
+            publication={publication}
+          />
+        ))}
       </div>
     </>
   )
