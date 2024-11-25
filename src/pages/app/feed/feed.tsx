@@ -9,10 +9,8 @@ import { PublicationCard } from './publication-card'
 export function Feed() {
   const { filters } = useFilters()
 
-  console.log(filters)
-
   const { data: publications } = useQuery({
-    queryKey: ['publications', filters], // Include filters in the query key
+    queryKey: ['publications', filters],
     queryFn: () =>
       getPublications({
         page: 1,
@@ -22,7 +20,7 @@ export function Feed() {
         createdAtEnd: filters.createdAtEnd || undefined,
         isLiked: filters.isLiked || undefined,
       }),
-    enabled: true, // Make sure the query runs even with filters
+    enabled: true,
   })
 
   return (

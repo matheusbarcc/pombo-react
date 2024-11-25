@@ -15,11 +15,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import { useFilters } from '@/pages/_layouts/app'
 
 import { PublicationCard } from '../feed/publication-card'
 
 export function Profile() {
   const { userId } = useParams()
+  const { filters } = useFilters()
 
   if (!userId) {
     throw new Error('User ID is required.')
@@ -30,15 +32,19 @@ export function Profile() {
     queryFn: () => getUserById(userId),
   })
 
-  const { data: publications = [] } = useQuery({
-    queryKey: ['publicationsByUser', user?.userId],
+  const { data: publications } = useQuery({
+    queryKey: ['publications', filters],
     queryFn: () =>
       getPublications({
         page: 1,
         limit: 10,
         userId: user?.userId,
+        content: filters.content || undefined,
+        createdAtStart: filters.createdAtStart || undefined,
+        createdAtEnd: filters.createdAtEnd || undefined,
+        isLiked: filters.isLiked || undefined,
       }),
-    enabled: !!user?.userId, // Only run the query if user?.userId is defined
+    enabled: true,
   })
 
   return (
@@ -75,19 +81,17 @@ export function Profile() {
           </CardHeader>
         </Card>
         <Separator />
-        {publications?.length > 0 ? (
-          publications?.map((publication) => {
-            return (
-              <PublicationCard
-                key={publication.publicationId}
-                publication={publication}
-              />
-            )
-          })
+        {publications && publications.length > 0 ? (
+          publications.map((publication) => (
+            <PublicationCard
+              key={publication.publicationId}
+              publication={publication}
+            />
+          ))
         ) : (
           <div className="flex justify-center items-center mt-10 gap-3 text-muted-foreground font-semibold">
             <Bird />
-            Este usuário ainda não pruublicou.
+            Nenhum pruu foi encontrado.
           </div>
         )}
       </div>
