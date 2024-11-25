@@ -27,7 +27,10 @@ export function MiniProfileCard() {
 
   return (
     <Card className="flex flex-col items-center">
-      <CardHeader className="flex flex-col items-center gap-3">
+      <CardHeader
+        className="flex flex-col items-center gap-3 hover:cursor-pointer"
+        onClick={() => navigate(`/profile/${authenticatedUser?.userId}`)}
+      >
         <Avatar
           src={
             authenticatedUser?.profilePicture ??

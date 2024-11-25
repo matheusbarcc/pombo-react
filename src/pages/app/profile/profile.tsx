@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { Bird } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useParams } from 'react-router-dom'
 
@@ -29,14 +30,15 @@ export function Profile() {
     queryFn: () => getUserById(userId),
   })
 
-  const { data: publications } = useQuery({
-    queryKey: ['publicationsByUser', userId],
+  const { data: publications = [] } = useQuery({
+    queryKey: ['publicationsByUser', user?.userId],
     queryFn: () =>
       getPublications({
         page: 1,
         limit: 10,
         userId: user?.userId,
       }),
+    enabled: !!user?.userId, // Only run the query if user?.userId is defined
   })
 
   return (
@@ -74,14 +76,21 @@ export function Profile() {
           </CardHeader>
         </Card>
         <Separator />
-        {publications?.map((publication) => {
-          return (
-            <PublicationCard
-              key={publication.publicationId}
-              publication={publication}
-            />
-          )
-        })}
+        {publications?.length > 0 ? (
+          publications?.map((publication) => {
+            return (
+              <PublicationCard
+                key={publication.publicationId}
+                publication={publication}
+              />
+            )
+          })
+        ) : (
+          <div className="flex justify-center items-center mt-10 gap-3 text-muted-foreground font-semibold">
+            <Bird />
+            Este usuário ainda não pruublicou.
+          </div>
+        )}
       </div>
     </>
   )

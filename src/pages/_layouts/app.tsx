@@ -1,5 +1,5 @@
 import { DialogTrigger } from '@radix-ui/react-dialog'
-import { Bird, Home, Plus, SlidersHorizontal } from 'lucide-react'
+import { Bird, Home, SlidersHorizontal } from 'lucide-react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import { MiniProfileCard } from '@/components/mini-profile-card'
@@ -36,9 +36,9 @@ export function AppLayout() {
         <MiniProfileCard />
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="font-bold text-lg h-12 flex">
-              <Plus />
-              Novo Pruu
+            <Button className="font-semibold text-md h-12 flex gap-2">
+              <Bird />
+              Pruublicar
             </Button>
           </DialogTrigger>
 
