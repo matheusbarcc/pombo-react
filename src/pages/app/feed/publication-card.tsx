@@ -117,7 +117,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           >
             <Heart className="h-5 w-5 text-primary" />
             <span className="text-muted-foreground text-sm">
-              {publication.likeAmount}
+              {likes.length}
             </span>
           </Button>
         ) : (
