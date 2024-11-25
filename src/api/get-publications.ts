@@ -18,6 +18,7 @@ export interface Publication {
   userName: string
   userEmail: string
   userProfilePictureUrl: string | null
+  likesUserIds: string[]
   likeAmount: number
   complaintAmount: number
   createdAt: string

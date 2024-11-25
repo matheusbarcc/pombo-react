@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from './ui/card'
 
-export function PublicationCard() {
+export function FakePublicationCard() {
   return (
     <Card className="w-[600px]">
       <CardHeader className="flex flex-row justify-between">
