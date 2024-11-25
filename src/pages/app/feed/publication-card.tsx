@@ -3,6 +3,7 @@ import { ptBR } from 'date-fns/locale'
 import { Heart, Megaphone } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
+import { Publication } from '@/api/get-publications'
 import { Avatar } from '@/components/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,18 +16,7 @@ import {
 } from '@/components/ui/card'
 
 export interface PublicationCardProps {
-  publication: {
-    publicationId: string
-    publicationContent: string
-    publicationAttachmentUrl: string | null
-    userId: string
-    userName: string
-    userEmail: string
-    userProfilePictureUrl: string | null
-    likeAmount: number
-    complaintAmount: number
-    createdAt: string
-  }
+  publication: Publication
 }
 
 export function PublicationCard({ publication }: PublicationCardProps) {
@@ -63,7 +53,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
       </CardHeader>
       <CardContent
         className="hover:cursor-pointer flex flex-col gap-3"
-        onClick={() => navigate('/details')}
+        onClick={() => navigate(`/details/${publication.publicationId}`)}
       >
         {publication.publicationContent}
         {publication.publicationAttachmentUrl && (

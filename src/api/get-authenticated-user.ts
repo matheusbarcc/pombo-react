@@ -1,6 +1,6 @@
 import { api } from '@/lib/axios'
 
-export interface GetAuthenticatedUserResponse {
+export interface User {
   userId: string
   name: string
   email: string
@@ -9,9 +9,7 @@ export interface GetAuthenticatedUserResponse {
 }
 
 export async function getAuthenticatedUser() {
-  const response = await api.get<GetAuthenticatedUserResponse>(
-    '/user/authenticated',
-  )
+  const response = await api.get<User>('/user/authenticated')
 
   return response.data
 }
