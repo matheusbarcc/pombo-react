@@ -35,7 +35,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           <div>
             <CardTitle
               className="text-md hover:cursor-pointer"
-              onClick={() => navigate('/profile')}
+              onClick={() => navigate(`/profile/${publication.userId}`)}
             >
               {publication.userName}
             </CardTitle>

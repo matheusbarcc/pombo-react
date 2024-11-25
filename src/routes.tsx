@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: '/', element: <Feed /> },
-      { path: '/profile', element: <Profile /> },
+      { path: '/profile/:userId', element: <Profile /> },
       { path: '/details/:publicationId', element: <PublicationDetails /> },
     ],
   },

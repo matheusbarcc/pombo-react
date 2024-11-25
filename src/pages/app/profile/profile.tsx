@@ -2,9 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Helmet } from 'react-helmet-async'
+import { useParams } from 'react-router-dom'
 
-import { getAuthenticatedUser } from '@/api/get-authenticated-user'
 import { getPublications } from '@/api/get-publications'
+import { getUserById } from '@/api/get-user-by-id'
 import { Avatar } from '@/components/avatar'
 import {
   Card,
@@ -17,18 +18,24 @@ import { Separator } from '@/components/ui/separator'
 import { PublicationCard } from '../feed/publication-card'
 
 export function Profile() {
-  const { data: authenticatedUser } = useQuery({
-    queryKey: ['authenticatedUser'],
-    queryFn: getAuthenticatedUser,
+  const { userId } = useParams()
+
+  if (!userId) {
+    throw new Error('User ID is required.')
+  }
+
+  const { data: user } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => getUserById(userId),
   })
 
   const { data: publications } = useQuery({
-    queryKey: ['publications'],
+    queryKey: ['publicationsByUser', userId],
     queryFn: () =>
       getPublications({
         page: 1,
         limit: 10,
-        userId: authenticatedUser?.userId,
+        userId: user?.userId,
       }),
   })
 
@@ -41,14 +48,14 @@ export function Profile() {
             <div className="flex flex-row gap-5">
               <Avatar
                 src={
-                  authenticatedUser?.profilePicture ??
+                  user?.profilePicture ??
                   'https://conteudo.imguol.com.br/c/esporte/10/2022/09/23/richarlison-comemora-gol-pela-selecao-brasileira-em-amistoso-contra-gana-1663969438957_v2_4x3.jpg'
                 }
                 size="xl"
               />
               <div className="flex flex-col gap-1">
-                <CardTitle>{authenticatedUser?.name}</CardTitle>
-                <CardDescription>{authenticatedUser?.email}</CardDescription>
+                <CardTitle>{user?.name}</CardTitle>
+                <CardDescription>{user?.email}</CardDescription>
               </div>
             </div>
             <div className="flex flex-col items-end gap-1">
@@ -56,8 +63,8 @@ export function Profile() {
                 Membro desde
               </span>
               <span className="text-foreground text-xs">
-                {authenticatedUser?.createdAt
-                  ? formatDistanceToNow(authenticatedUser.createdAt, {
+                {user?.createdAt
+                  ? formatDistanceToNow(user.createdAt, {
                       locale: ptBR,
                       addSuffix: true,
                     })
