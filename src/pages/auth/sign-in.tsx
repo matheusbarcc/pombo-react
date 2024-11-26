@@ -1,5 +1,6 @@
 // import { useMutation } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
+import { jwtDecode } from 'jwt-decode'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
@@ -46,7 +47,13 @@ export function SignIn() {
 
       await localStorage.setItem('pombo-auth-token', response)
 
-      navigate('/')
+      const a = jwtDecode(response)
+
+      if (a.sub?.includes('admin')) {
+        navigate('/admin')
+      } else {
+        navigate('/')
+      }
     } catch {
       toast.error('Credenciais inválidas.')
     }

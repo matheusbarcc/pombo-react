@@ -77,14 +77,6 @@ export function EditProfileDialog() {
               {...register('name')}
             />
           </div>
-          <div className="space-y-1">
-            <Label>Foto de perfil</Label>
-            <Input
-              id="foto-perfil"
-              type="file"
-              className="hover:cursor-pointer"
-            />
-          </div>
         </div>
         <Button
           disabled={isSubmitting}
