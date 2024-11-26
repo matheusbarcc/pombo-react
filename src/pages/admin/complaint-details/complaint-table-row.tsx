@@ -1,16 +1,20 @@
+import { format } from 'date-fns'
 import { Check, X } from 'lucide-react'
 
+import { Complaint } from '@/api/get-complaints'
 import { Button } from '@/components/ui/button'
 import { TableCell, TableRow } from '@/components/ui/table'
 
-export function ComplaintTableRow() {
+export interface ComplaintTableRowProps {
+  complaint: Complaint
+}
+
+export function ComplaintTableRow({ complaint }: ComplaintTableRowProps) {
   return (
     <TableRow>
-      <TableCell>
-        <div>Jesse Pinkman</div>
-      </TableCell>
-      <TableCell>DISCURSO DE ODIO</TableCell>
-      <TableCell>22/11/2024</TableCell>
+      <TableCell>{complaint.userName}</TableCell>
+      <TableCell>{complaint.reason}</TableCell>
+      <TableCell>{format(complaint.createdAt, 'dd/MM/yyyy')}</TableCell>
       <TableCell className="flex flex-row gap-2">
         <Button variant="outline" size={'sm'}>
           <Check />

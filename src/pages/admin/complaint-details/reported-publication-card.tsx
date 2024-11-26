@@ -1,3 +1,7 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+
+import { Avatar } from '@/components/avatar'
 import {
   Card,
   CardContent,
@@ -5,39 +9,38 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { PublicationCardProps } from '@/pages/app/feed/publication-card'
 
-import profilePic from '../../../assets/mike.jpg'
-import pubPic from '../../../assets/pombo.png'
-
-export function ReportedPublicationCard() {
+export function ReportedPublicationCard({ publication }: PublicationCardProps) {
   return (
     <>
       <Card className="w-full">
         <CardHeader className="flex flex-row justify-between">
           <div className="flex flex-row items-center gap-4">
-            <img
-              src={profilePic}
-              alt=""
-              className="h-10 w-10 rounded-sm
-                  outline
-                  outline-2
-                  outline-offset-2
-                  outline-primary"
-            />
+            <Avatar src={publication.userProfilePictureUrl} />
             <div>
-              <CardTitle className="text-md">pombo</CardTitle>
+              <CardTitle className="text-md">{publication.userName}</CardTitle>
               <CardDescription className="text-xs text-muted-foreground">
-                pombo@pombo.com
+                {publication.userEmail}
               </CardDescription>
             </div>
           </div>
           <span className="text-xs text-muted-foreground">
-            há menos de um minuto
+            {formatDistanceToNow(publication.createdAt, {
+              locale: ptBR,
+              addSuffix: true,
+            })}
           </span>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
-          <div>Aqui suas ideias ganham asas. - GPT, Chat</div>
-          <img src={pubPic} alt="" className="rounded-md" />
+          <div>{publication.publicationContent}</div>
+          {publication.publicationAttachmentUrl && (
+            <img
+              src={publication.publicationAttachmentUrl}
+              alt=""
+              className="rounded-md"
+            />
+          )}
         </CardContent>
       </Card>
     </>

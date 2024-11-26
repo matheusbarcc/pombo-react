@@ -1,7 +1,11 @@
 import { Search } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+
+import { useComplaintFilters } from '@/pages/_layouts/admin'
 
 import { Button } from './ui/button'
-import { DatePickerWithRange } from './ui/date-picker-with-range'
+import { DatePicker } from './ui/date-picker'
 import { DialogContent, DialogHeader, DialogTitle } from './ui/dialog'
 import { Label } from './ui/label'
 import {
@@ -12,29 +16,64 @@ import {
   SelectValue,
 } from './ui/select'
 
+const complaintFiltersFormSchema = z.object({
+  reason: z.enum([
+    'SCAM',
+    'HATE_SPEECH',
+    'BULLYING_OR_HARASSMENT',
+    'SCAM',
+    'FALSE_INFORMATION',
+  ]),
+  status: z.enum(['PENDING', 'ACCEPTED', 'REJECTED']),
+  createdAtStart: z.string(),
+  createdAtEnd: z.string(),
+})
+
+type ComplaintFilterForm = z.infer<typeof complaintFiltersFormSchema>
+
 export function ComplaintFiltersDialog() {
+  const { setComplaintFilters } = useComplaintFilters()
+
+  const { handleSubmit, watch, setValue } = useForm<ComplaintFilterForm>({
+    defaultValues: {
+      status: 'PENDING',
+    },
+  })
+
+  async function handleSetComplaintFilters(data: ComplaintFilterForm) {
+    // console.log('Complaint filters: ', data)
+    setComplaintFilters(data)
+  }
+
   return (
     <DialogContent className="max-w-lg mx-auto">
       <DialogHeader>
         <DialogTitle>Filtros</DialogTitle>
       </DialogHeader>
 
-      <form className="space-y-4">
+      <form
+        onSubmit={handleSubmit(handleSetComplaintFilters)}
+        className="space-y-4"
+      >
         <div className="flex gap-5">
           <div className="w-1/2">
             <Label>Motivo</Label>
-            <Select>
+            <Select
+              onValueChange={(value) =>
+                setValue('reason', value as ComplaintFilterForm['reason'])
+              }
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="spam">Spam</SelectItem>
-                <SelectItem value="hate_speech">Discurso de Ódio</SelectItem>
-                <SelectItem value="bullying_or_harassment">
+                <SelectItem value="SPAM">Spam</SelectItem>
+                <SelectItem value="HATE_SPEECH">Discurso de Ódio</SelectItem>
+                <SelectItem value="BULLYING_OR_HARASSMENT">
                   Assédio ou Bullying
                 </SelectItem>
-                <SelectItem value="scam">Golpe</SelectItem>
-                <SelectItem value="false_information">
+                <SelectItem value="SCAM">Golpe</SelectItem>
+                <SelectItem value="FALSE_INFORMATION">
                   Informação Falsa
                 </SelectItem>
               </SelectContent>
@@ -42,7 +81,11 @@ export function ComplaintFiltersDialog() {
           </div>
           <div className="w-1/2">
             <Label>Status</Label>
-            <Select>
+            <Select
+              onValueChange={(value) =>
+                setValue('status', value as ComplaintFilterForm['status'])
+              }
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Pendente" />
               </SelectTrigger>
@@ -55,9 +98,33 @@ export function ComplaintFiltersDialog() {
           </div>
         </div>
 
-        <div className="gap-2 w-full">
-          <Label>Data de criação</Label>
-          <DatePickerWithRange id="date-picker" className="w-full" />
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="created-at-start">Data de criação (inicio)</Label>
+            <DatePicker
+              value={
+                watch('createdAtStart')
+                  ? new Date(watch('createdAtStart'))
+                  : undefined
+              }
+              onChange={(date) =>
+                setValue('createdAtStart', date ? date.toISOString() : '')
+              }
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="created-at-end">Data de criação (final)</Label>
+            <DatePicker
+              value={
+                watch('createdAtEnd')
+                  ? new Date(watch('createdAtEnd'))
+                  : undefined
+              }
+              onChange={(date) =>
+                setValue('createdAtEnd', date ? date.toISOString() : '')
+              }
+            />
+          </div>
         </div>
         <Button className="w-full bg-primary" type="submit">
           <Search />

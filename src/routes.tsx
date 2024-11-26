@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: '/admin', element: <ReportedPublications /> },
-      { path: '/admin/details', element: <ComplaintDetails /> },
+      { path: '/admin/details/:publicationId', element: <ComplaintDetails /> },
     ],
   },
   {

@@ -52,7 +52,7 @@ export function ReportedPublicationCard({
         <Button
           variant="default"
           onClick={() => {
-            navigate('/admin/details')
+            navigate(`/admin/details/${reportedPublication.publicationId}`)
           }}
         >
           <Search />
