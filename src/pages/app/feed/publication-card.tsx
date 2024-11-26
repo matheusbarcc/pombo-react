@@ -33,11 +33,6 @@ export function PublicationCard({ publication }: PublicationCardProps) {
 
   const [likes, setLikes] = useState(publication.likesUserIds || [])
 
-  if (publication.userProfilePictureUrl === null) {
-    publication.userProfilePictureUrl =
-      'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
-  }
-
   const { data: authenticatedUser } = useQuery({
     queryKey: ['authenticatedUser'],
     queryFn: getAuthenticatedUser,

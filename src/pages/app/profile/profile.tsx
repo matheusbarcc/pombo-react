@@ -56,13 +56,7 @@ export function Profile() {
         <Card className="border-0 shadow-none">
           <CardHeader className="flex flex-row justify-between">
             <div className="flex flex-row gap-5">
-              <Avatar
-                src={
-                  user?.profilePicture ??
-                  'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
-                }
-                size="xl"
-              />
+              <Avatar src={user?.profilePicture} size="xl" />
               <div className="flex flex-col gap-1">
                 <CardTitle>{user?.name}</CardTitle>
                 <CardDescription>{user?.email}</CardDescription>

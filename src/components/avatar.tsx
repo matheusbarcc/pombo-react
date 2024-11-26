@@ -1,5 +1,5 @@
 interface AvatarProps {
-  src: string // The image source
+  src?: string | null // The image source
   alt?: string // Alt text for the image
   size?: 'small' | 'large' | 'xl' // Size variants
 }
@@ -11,6 +11,11 @@ export function Avatar({ src, alt = '', size = 'small' }: AvatarProps) {
     large:
       'w-16 h-16 rounded-lg outline outline-offset-2 outline-primary object-cover',
     xl: 'w-20 h-20 rounded-lg outline outline-offset-2 outline-primary object-cover',
+  }
+
+  if (src === undefined || src === null) {
+    src =
+      'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
   }
 
   return (

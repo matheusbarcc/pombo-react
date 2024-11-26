@@ -31,13 +31,7 @@ export function MiniProfileCard() {
         className="flex flex-col items-center gap-3 hover:cursor-pointer"
         onClick={() => navigate(`/profile/${authenticatedUser?.userId}`)}
       >
-        <Avatar
-          src={
-            authenticatedUser?.profilePicture ??
-            'https://conteudo.imguol.com.br/c/esporte/10/2022/09/23/richarlison-comemora-gol-pela-selecao-brasileira-em-amistoso-contra-gana-1663969438957_v2_4x3.jpg'
-          }
-          size="large"
-        />
+        <Avatar src={authenticatedUser?.profilePicture} size="large" />
         <div className="flex flex-col justify-center items-center">
           <CardTitle className="text-lg">{authenticatedUser?.name}</CardTitle>
           <CardDescription>{authenticatedUser?.email}</CardDescription>
