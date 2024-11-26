@@ -16,7 +16,7 @@ export function Feed() {
       queryFn: ({ pageParam = 1 }) =>
         getPublications({
           page: pageParam,
-          limit: 1,
+          limit: 10,
           content: filters.content || undefined,
           createdAtStart: filters.createdAtStart || undefined,
           createdAtEnd: filters.createdAtEnd || undefined,

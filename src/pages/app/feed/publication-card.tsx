@@ -1,11 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { Heart, Megaphone } from 'lucide-react'
+import { Heart, Megaphone, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
+import { deletePublication } from '@/api/delete-publication'
 import { getAuthenticatedUser } from '@/api/get-authenticated-user'
 import { Publication } from '@/api/get-publications'
 import { likePublication } from '@/api/like-publication'
@@ -71,6 +72,19 @@ export function PublicationCard({ publication }: PublicationCardProps) {
 
   const isLiked = likes.some((userId) => userId === authenticatedUser?.userId)
 
+  const { mutateAsync: deletePub } = useMutation({
+    mutationFn: deletePublication,
+  })
+
+  async function handleDeletePublication(publicationId: string) {
+    try {
+      await deletePub(publicationId)
+      window.location.reload()
+    } catch {
+      toast.error('Erro ao curtir pruu.')
+    }
+  }
+
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row justify-between">
@@ -88,12 +102,23 @@ export function PublicationCard({ publication }: PublicationCardProps) {
             </CardDescription>
           </div>
         </div>
-        <span className="text-xs text-muted-foreground">
-          {formatDistanceToNow(publication.createdAt, {
-            locale: ptBR,
-            addSuffix: true,
-          })}
-        </span>
+        <div className="flex gap-4 items-center">
+          <span className="text-xs text-muted-foreground">
+            {formatDistanceToNow(publication.createdAt, {
+              locale: ptBR,
+              addSuffix: true,
+            })}
+          </span>
+          {publication.userId === authenticatedUser?.userId ? (
+            <Button
+              variant="ghost"
+              className="text-muted-foreground hover:text-rose-500 hover:bg-transparent p-0"
+              onClick={() => handleDeletePublication(publication.publicationId)}
+            >
+              <Trash2 />
+            </Button>
+          ) : null}
+        </div>
       </CardHeader>
       <CardContent
         className="hover:cursor-pointer flex flex-col gap-3"
