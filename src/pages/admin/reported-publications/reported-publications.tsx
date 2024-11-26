@@ -1,59 +1,36 @@
-import { Search } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
-import { useNavigate } from 'react-router-dom'
 
-import { Avatar } from '@/components/avatar'
-import { ComplaintCaptions } from '@/components/complaint-captions'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { getReportedPublications } from '@/api/get-reported-publications'
 
-import waltuhProfilePic from '../../../assets/waltuh.jpg'
+import { ReportedPublicationCard } from './reported-publication-card'
 
 export function ReportedPublications() {
-  const navigate = useNavigate()
+  const { data: reportedPublications } = useQuery({
+    queryKey: ['reported-publications'],
+    queryFn: () =>
+      getReportedPublications({
+        page: 1,
+        limit: 10,
+      }),
+  })
 
   return (
     <>
       <Helmet title="Admin" />
-      <div className="flex flex-col h-screen p-7 gap-5">
+      <div className="flex flex-col h-screen p-7 gap-8">
         <h1 className="text-2xl font-bold text-foreground">
           Publicações Denunciadas
         </h1>
-        <div>
-          <Card>
-            <CardHeader className="flex flex-row justify-between">
-              <div className="flex gap-4">
-                <Avatar src={waltuhProfilePic} size="small" />
-                <div>
-                  <CardTitle className="text-md">Walter White</CardTitle>
-                  <CardDescription className="text-xs">
-                    cook@example.com
-                  </CardDescription>
-                </div>
-              </div>
-              <div className="flex gap-8">
-                <ComplaintCaptions />
-              </div>
-            </CardHeader>
-            <CardContent className="flex items-center justify-between">
-              <span>Im the danger</span>
-              <Button
-                variant="default"
-                onClick={() => {
-                  navigate('/admin/details')
-                }}
-              >
-                <Search />
-                Analisar
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="flex flex-col gap-5">
+          {reportedPublications?.map((reportedPublication) => {
+            return (
+              <ReportedPublicationCard
+                key={reportedPublication.publicationId}
+                reportedPublication={reportedPublication}
+              />
+            )
+          })}
         </div>
       </div>
     </>
