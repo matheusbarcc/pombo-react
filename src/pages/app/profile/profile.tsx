@@ -59,7 +59,7 @@ export function Profile() {
               <Avatar
                 src={
                   user?.profilePicture ??
-                  'https://conteudo.imguol.com.br/c/esporte/10/2022/09/23/richarlison-comemora-gol-pela-selecao-brasileira-em-amistoso-contra-gana-1663969438957_v2_4x3.jpg'
+                  'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
                 }
                 size="xl"
               />

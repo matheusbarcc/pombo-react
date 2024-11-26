@@ -20,6 +20,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+
+import { ReportPublicationDialog } from './report-publication-dialog'
 
 export interface PublicationCardProps {
   publication: Publication
@@ -32,7 +35,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
 
   if (publication.userProfilePictureUrl === null) {
     publication.userProfilePictureUrl =
-      'https://conteudo.imguol.com.br/c/esporte/10/2022/09/23/richarlison-comemora-gol-pela-selecao-brasileira-em-amistoso-contra-gana-1663969438957_v2_4x3.jpg'
+      'https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg'
   }
 
   const { data: authenticatedUser } = useQuery({
@@ -157,15 +160,25 @@ export function PublicationCard({ publication }: PublicationCardProps) {
             </span>
           </Button>
         )}
-        <Button
-          variant="ghost"
-          className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
-        >
-          <Megaphone className="h-5 w-5 text-muted-foreground" />
-          <span className="text-muted-foreground text-sm font-semibold">
-            {publication.complaintAmount}
-          </span>
-        </Button>
+        {publication.userId !== authenticatedUser?.userId ? (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                variant="ghost"
+                className="h-2 hover:bg-transparent flex items-center gap-2 px-0"
+              >
+                <Megaphone className="h-5 w-5 text-muted-foreground" />
+                <span className="text-muted-foreground text-sm font-semibold">
+                  {publication.complaintAmount}
+                </span>
+              </Button>
+            </DialogTrigger>
+
+            <ReportPublicationDialog
+              publicationId={publication.publicationId}
+            />
+          </Dialog>
+        ) : null}
       </CardFooter>
     </Card>
   )
