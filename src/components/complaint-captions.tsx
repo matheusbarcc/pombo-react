@@ -26,13 +26,13 @@ export function ComplaintCaptions({ captions }: ComplaintCaptionsProps) {
       <div className="flex gap-2 items-center">
         <div className="bg-rose-500 w-3 h-3 p-0 m-0 rounded-full" />
         <span className="text-muted-foreground text-sm">
-          {captions.acceptedComplaintAmount}
+          {captions.rejectedComplaintAmount}
         </span>
       </div>
       <div className="flex gap-2 items-center">
         <div className="bg-green-500 w-3 h-3 p-0 m-0 rounded-full" />
         <span className="text-muted-foreground text-sm">
-          {captions.rejectedComplaintAmount}
+          {captions.acceptedComplaintAmount}
         </span>
       </div>
     </>

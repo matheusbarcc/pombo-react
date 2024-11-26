@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 
 import { getComplaints } from '@/api/get-complaints'
 import { getPublicationById } from '@/api/get-publication-by-id'
-import { Pagination } from '@/components/pagination'
 import {
   Table,
   TableBody,
@@ -30,23 +29,22 @@ export function ComplaintDetails() {
     queryFn: () => getPublicationById(publicationId),
   })
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ['complaints', complaintFilters],
-      queryFn: ({ pageParam = 1 }) =>
-        getComplaints({
-          page: pageParam,
-          limit: 5,
-          publicationId,
-          reason: complaintFilters.reason || undefined,
-          status: complaintFilters.status || 'PENDING',
-          createdAtStart: complaintFilters.createdAtStart || undefined,
-          createdAtEnd: complaintFilters.createdAtEnd || undefined,
-        }),
-      initialPageParam: 1,
-      getNextPageParam: (lastPage, allPages) =>
-        lastPage.length === 1 ? allPages.length + 1 : undefined,
-    })
+  const { data } = useInfiniteQuery({
+    queryKey: ['complaints', complaintFilters],
+    queryFn: ({ pageParam = 1 }) =>
+      getComplaints({
+        page: pageParam,
+        limit: 10,
+        publicationId,
+        reason: complaintFilters.reason || undefined,
+        status: complaintFilters.status || 'PENDING',
+        createdAtStart: complaintFilters.createdAtStart || undefined,
+        createdAtEnd: complaintFilters.createdAtEnd || undefined,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 1 ? allPages.length + 1 : undefined,
+  })
 
   const currentPageComplaints = data?.pages[data.pages.length - 1] || []
 
@@ -65,7 +63,6 @@ export function ComplaintDetails() {
           </h1>
           <div className="flex gap-8">{/* <ComplaintCaptions /> */}</div>
         </div>
-        <Pagination pageIndex={0} totalCount={105} perPage={1} />
         <div className="rounded-md border">
           <Table>
             <TableHeader>

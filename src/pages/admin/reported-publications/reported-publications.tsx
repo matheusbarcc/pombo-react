@@ -15,6 +15,10 @@ export function ReportedPublications() {
       }),
   })
 
+  const reportedPublicationsOnlyPending = reportedPublications?.filter(
+    (publication) => publication.pendingComplaintAmount > 0,
+  )
+
   return (
     <>
       <Helmet title="Admin" />
@@ -23,7 +27,7 @@ export function ReportedPublications() {
           Publicações Denunciadas
         </h1>
         <div className="flex flex-col gap-5">
-          {reportedPublications?.map((reportedPublication) => {
+          {reportedPublicationsOnlyPending?.map((reportedPublication) => {
             return (
               <ReportedPublicationCard
                 key={reportedPublication.publicationId}
