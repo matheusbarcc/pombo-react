@@ -49,9 +49,7 @@ export function PublicationDetails() {
               className="items-center border-0 border-t pt-5 px-2 rounded-none flex flex-row justify-between shadow-none bg-transparent"
             >
               <div className="flex gap-3">
-                {user.profilePicture ? (
-                  <Avatar src={user.profilePicture} size="small" />
-                ) : null}
+                <Avatar src={user.profilePicture} size="small" />
                 <div>
                   <CardTitle className="text-md">{user.name}</CardTitle>
                   <CardDescription className="text-xs">

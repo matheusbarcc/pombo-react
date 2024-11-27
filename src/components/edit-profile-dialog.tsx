@@ -47,7 +47,7 @@ export function EditProfileDialog() {
       await editUser({
         name: data.name,
         email: 'a@a.com',
-        cpf: '700.110.540-69',
+        cpf: '052.961.630-01',
         password: '123',
       })
 

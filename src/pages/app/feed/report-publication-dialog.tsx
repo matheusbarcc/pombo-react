@@ -35,8 +35,8 @@ export function ReportPublicationDialog({
   publicationId,
 }: ReportPublicationDialogProps) {
   const {
-    register,
     handleSubmit,
+    setValue,
     formState: { isSubmitting },
   } = useForm<ReportForm>()
 
@@ -68,7 +68,10 @@ export function ReportPublicationDialog({
       </DialogHeader>
 
       <form onSubmit={handleSubmit(handleReport)} className="space-y-4">
-        <RadioGroup className="py-3 space-y-3" {...register('reason')}>
+        <RadioGroup
+          className="py-3 space-y-3"
+          onValueChange={(value) => setValue('reason', value)}
+        >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="SPAM" id="SPAM" />
             <Label htmlFor="SPAM">Spam</Label>
@@ -97,7 +100,6 @@ export function ReportPublicationDialog({
           disabled={isSubmitting}
           className="w-full bg-primary"
           type="submit"
-          id="file"
         >
           <Megaphone />
           Denunciar
